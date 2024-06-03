@@ -32,17 +32,23 @@ def index():
     return "Bot is running!"
 
 def start_bot():
-    # Create a new event loop for this thread
-    loop = asyncio.new_event_loop()
-    asyncio.set_event_loop(loop)
-    
-    # Run the bot until disconnected
-    bot.run_until_disconnected()
+    try:
+        # Create a new event loop for this thread
+        loop = asyncio.new_event_loop()
+        asyncio.set_event_loop(loop)
+        
+        # Run the bot until disconnected
+        print("Starting Telegram bot...")
+        bot.run_until_disconnected()
+    except Exception as e:
+        print(f"Error starting bot: {e}")
 
 if __name__ == "__main__":
     # Run the bot in a separate thread
-    Thread(target=start_bot).start()
+    bot_thread = Thread(target=start_bot)
+    bot_thread.start()
 
     # Start Flask app
     port = int(os.environ.get('PORT', 5000))
+    print(f"Starting Flask server on port {port}...")
     app.run(host='0.0.0.0', port=port)
