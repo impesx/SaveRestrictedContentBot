@@ -16,7 +16,7 @@ API_ID = config("API_ID", default=None, cast=int)
 API_HASH = config("API_HASH", default=None)
 BOT_TOKEN = config("BOT_TOKEN", default=None)
 # SESSION = config("SESSION", default=None)
-SESSION = '1BQAWZmxvcmEud2ViLnRlbGVncmFtLm9yZwG7k7zuddsheD+m+i0kgHkxKOIKR6uPEZowYX86yvmUkzl0C1wiuE3SvGrJCqrxLYJdblhXq11uTKHFl6z+dxKuXKoNYNo5//FdFlK4PpGIFKhUvo3R8dhhyHw9qgB3qH9lbMCik2ovxZCypwAFs7zg9h5O2CGToW+JxFHzB9K3x115Q5zwj1BgcDlVdOT0wUV660nrHZPYyxl4ut3jOJkEfxykF6xqGC0OtgK8dy2f1UuxgSUqpQ1ln5LSoaP/6AcVS93twvGMgV6pv6C8Xzuax5UtWczRUhrID+633vOIHu8uRc2WY+BUi5PBNr1gPD87U1NyiMFC4iSV7IC1GoKBrg=='
+SESSION = 'BQG2W_4ArmxAlArtK8YpL6SkZ2vPcqxtmYZ76h3I9nBiS4S3hHb_6CFsEohYnQjSRe0IiTy0ZySf1IDKvRmaPrzO0wIqwATd-BoXG07_5VJB_okROL2IrgV-79aEoPRedAGBfFCErv-3YF44Uh4O9Lt1WU3rLwNfrvcKQiAK8lXUsF2UEY4gz1K4ZkhfJLofITm5BIu_AypSwKje_u9wYRoW0ZUSlBvqwS5DYtP63HyO78GbPwNs1H5omo-HNGnQsgUFhb5p2-Q3TP4Tg0Fjeg_KmGlv5d5yya97Y4jes27euP7k6qoxk1wd0MK-B-2BX1p_i54k6yxqnHpR8uq1YbX0zzZy5QAAAABBZUIQAA'
 FORCESUB = config("FORCESUB", default=None)
 AUTH = config("AUTH", default=None, cast=int)
 
