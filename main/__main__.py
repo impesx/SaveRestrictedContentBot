@@ -5,28 +5,11 @@ import logging
 from flask import Flask
 from . import bot
 import os
-import ntplib
-from time import ctime
 
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
                     level=logging.WARNING)
 
-# Function to sync time
-def sync_time():
-    try:
-        client = ntplib.NTPClient()
-        response = client.request('pool.ntp.org')
-        if response:
-            # Set system time (requires administrative privileges)
-            # On Unix-based systems
-            os.system(f'date -s "{ctime(response.tx_time)}"')
-            print("System time synchronized.")
-    except Exception as e:
-        print(f"Failed to sync time: {e}")
-
-# Sync time
-sync_time()
-
+# Plugin loading
 path = "main/plugins/*.py"
 files = glob.glob(path)
 for name in files:
@@ -48,7 +31,13 @@ def index():
 
 if __name__ == "__main__":
     # Start the bot
-    bot.run_until_disconnected()
+    from threading import Thread
+
+    def start_bot():
+        bot.run_until_disconnected()
+
+    # Run the bot in a separate thread
+    Thread(target=start_bot).start()
 
     # Start Flask app
     port = int(os.environ.get('PORT', 5000))
