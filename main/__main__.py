@@ -5,6 +5,8 @@ import logging
 from flask import Flask
 from . import bot
 import os
+import asyncio
+from threading import Thread
 
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
                     level=logging.WARNING)
@@ -29,13 +31,15 @@ app = Flask(__name__)
 def index():
     return "Bot is running!"
 
+def start_bot():
+    # Create a new event loop for this thread
+    loop = asyncio.new_event_loop()
+    asyncio.set_event_loop(loop)
+    
+    # Run the bot until disconnected
+    bot.run_until_disconnected()
+
 if __name__ == "__main__":
-    # Start the bot
-    from threading import Thread
-
-    def start_bot():
-        bot.run_until_disconnected()
-
     # Run the bot in a separate thread
     Thread(target=start_bot).start()
 
