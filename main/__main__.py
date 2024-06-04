@@ -3,10 +3,11 @@ from pathlib import Path
 from main.utils import load_plugins
 import logging
 from flask import Flask
-from . import bot
 import os
 import asyncio
 from threading import Thread
+from telethon import TelegramClient
+from pyrogram import Client
 
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
                     level=logging.WARNING)
@@ -31,24 +32,39 @@ app = Flask(__name__)
 def index():
     return "Bot is running!"
 
-def start_bot():
+def start_telegram_bot():
     try:
         # Create a new event loop for this thread
         loop = asyncio.new_event_loop()
         asyncio.set_event_loop(loop)
         
-        # Run the bot until disconnected
-        print("Starting Telegram bot...")
-        bot.run_until_disconnected()
+        # Initialize the bot here
+        API_ID = int(os.getenv("API_ID"))
+        API_HASH = os.getenv("API_HASH")
+        BOT_TOKEN = os.getenv("BOT_TOKEN")
+
+        # Choose either Pyrogram or Telethon, comment out the other
+        # Pyrogram example
+        pyrogram_bot = Client("bot", api_id=API_ID, api_hash=API_HASH, bot_token=BOT_TOKEN)
+        pyrogram_bot.start()
+        print("Pyrogram bot started and running...")
+        pyrogram_bot.idle()  # Keeps the bot running
+        
+        # Telethon example
+        # telethon_bot = TelegramClient('bot', API_ID, API_HASH)
+        # telethon_bot.start(bot_token=BOT_TOKEN)
+        # print("Telethon bot started and running...")
+        # telethon_bot.run_until_disconnected()
+        
     except Exception as e:
         print(f"Error starting bot: {e}")
 
 if __name__ == "__main__":
     # Run the bot in a separate thread
-    bot_thread = Thread(target=start_bot)
+    bot_thread = Thread(target=start_telegram_bot)
     bot_thread.start()
 
     # Start Flask app
-    port = int(os.environ.get('PORT', 5000))
+    port = int(os.environ.get('PORT', 10000))
     print(f"Starting Flask server on port {port}...")
     app.run(host='0.0.0.0', port=port)
