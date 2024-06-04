@@ -27,7 +27,12 @@ class SimpleHandler(BaseHTTPRequestHandler):
         self.send_response(200)
         self.send_header("Content-type", "text/html")
         self.end_headers()
-        self.wfile.write(b"PES Bot is running")
+        self.wfile.write(b"PES Bot is running since 2024.6.4")
+        
+    def do_HEAD(self):
+        self.send_response(200)
+        self.send_header("Content-type", "text/html")
+        self.end_headers()
 
 def run_http_server():
     server_address = ('', 10000)
