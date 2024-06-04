@@ -17,7 +17,7 @@ for name in files:
         plugin_name = patt.stem
         load_plugins(plugin_name.replace(".py", ""))
 
-#Don't be a thief 
+# Don't be a thief
 print("Successfully deployed!")
 print("By MaheshChauhan • DroneBots")
 
@@ -27,7 +27,7 @@ class SimpleHandler(BaseHTTPRequestHandler):
         self.send_response(200)
         self.send_header("Content-type", "text/html")
         self.end_headers()
-        self.wfile.write(b"Bot is running")
+        self.wfile.write(b"PES Bot is running")
 
 def run_http_server():
     server_address = ('', 10000)
@@ -35,13 +35,10 @@ def run_http_server():
     print("Starting HTTP server on port 10000...")
     httpd.serve_forever()
 
-def start_bot():
-    bot.run_until_disconnected()
-
 if __name__ == "__main__":
-    # Start the bot in a new thread
-    bot_thread = threading.Thread(target=start_bot)
-    bot_thread.start()
+    # Start the HTTP server in a new thread
+    server_thread = threading.Thread(target=run_http_server)
+    server_thread.start()
 
-    # Start the HTTP server
-    run_http_server()
+    # Start the bot in the main thread
+    bot.run_until_disconnected()
