@@ -27,7 +27,7 @@ class SimpleHandler(BaseHTTPRequestHandler):
         self.send_response(200)
         self.send_header("Content-type", "text/html")
         self.end_headers()
-        self.wfile.write(b"PES Bot is running since 2024.6.4")
+        self.wfile.write(b"PES Bot is running since 2024.6.20")
         
     def do_HEAD(self):
         self.send_response(200)
@@ -46,4 +46,4 @@ if __name__ == "__main__":
     server_thread.start()
 
     # Start the bot in the main thread
-    bot.run_until_disconnected()
+    # bot.run_until_disconnected()
